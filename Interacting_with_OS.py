@@ -77,3 +77,34 @@ for key, value in os.environ.items():
 
 import os
 os.path.isfile("/directory")
+
+
+import os
+
+# Define the filename to check (ensure you include the correct file extension)
+file_name = "Screenshot 2025-03-13 202823.png"  
+
+# Check if the file or directory exists
+if os.path.exists(file_name):
+    print("Available")  # If the file or folder exists, print "Available"
+    
+    # Check specifically if it is a file (not a directory)
+    if os.path.isfile(file_name):
+        print("Is a file")  # This confirms that it is a file, not a folder
+
+else:
+    print("File does not exist.")  # If the file does not exist, print this message
+
+import os
+
+# Define the directory name to create
+dir_name = "AAAA"
+
+# Attempt to create the directory
+try:
+    # os.makedirs(dir_name, exist_ok=True)  # This line is commented out to prevent automatic execution
+    
+    print(f"Directory '{dir_name}' would be created if this line were executed.")
+    
+except Exception as e:
+    print(f"Error creating directory: {e}")  # Handle any errors that may occur
