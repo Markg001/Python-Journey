@@ -88,3 +88,71 @@ try:
 except socket.error as error:
     print(str(error))
     print("Connection error")
+
+#  Useful methods for gathering more information
+# about an IP address or hostname include the following:
+# • socket�gethostbyname(hostname): This method returns a string converting a hostname
+#       to the IPv4 address format.
+#            Socket Programming84
+#       This method is equivalent to the nslookup command we can find in some operating sys-
+#          tems.
+# • socket�gethostbyname_ex(name): This method returns a tuple that contains an IP ad-
+#   dress for a specific domain name. If we see more than one IP address, this means one
+#    domain runs on multiple IP addresses:
+# • socket�getfqdn([domain]): This is used to find the fully qualified name of a domain.
+# • socket�gethostbyaddr(ip_address): This method returns a tuple with three values
+#   (hostname, name, ip_address_list). hostname represents the host that corresponds to the
+#   given IP address, name is a list of names associated with this IP address, and ip_address_
+#   list is a list of IP addresses that are available on the same host.
+# • socket�getservbyname(servicename[, protocol_name]): This method allows you to ob-
+#   tain the port number from the port name.
+# • socket�getservbyport(port[, protocol_name]): This method performs the reverse op-
+#   eration to the previous one, allowing you to obtain the port name from the port number.
+
+import socket
+
+def find_services_name():
+    for port in [21, 22, 23, 25, 80]:
+        print("Port: %s => Service Name: %s" % (port, socket.getservbyport(port, 'tcp')))
+    
+    # Checking service for port 53 with UDP
+    print("Port: %s => Service Name: %s" % (53, socket.getservbyport(53, 'udp')))
+
+if __name__ == '__main__':
+    find_services_name()
+
+'/n--------------------------------------------------------------------------------------------'
+import socket
+
+host = input("Enter host name: ")
+port = int(input("Enter port number: "))
+
+try:
+    # Create a socket object for TCP (IPv4)
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as socket_tcp:
+        socket_tcp.settimeout(10)  # Set a timeout of 10 seconds
+        
+        # Try to connect to the server and port
+        if socket_tcp.connect_ex((host, port)) == 0:
+            print("Established connection to the server %s in the port %s" % (host, port))
+            
+            # Prepare the HTTP request
+            request = "GET / HTTP/1.1\r\nHost:%s\r\n\r\n" % host
+            socket_tcp.send(request.encode())  # Send the request to the server
+            
+            # Receive the data from the server
+            data = socket_tcp.recv(4096)  # 4096 bytes
+            print("Data:", repr(data))
+            print("Length of data:", len(data))
+        else:
+            print(f"Connection failed to {host} on port {port}")
+
+except socket.timeout as error:
+    print("Timeout error:", error)
+
+except socket.gaierror as error:
+    print("Connection error to the server:", error)
+
+except socket.error as error:
+    print("Connection error:", error)
+
