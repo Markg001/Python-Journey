@@ -124,8 +124,8 @@ if __name__ == '__main__':
 '/n--------------------------------------------------------------------------------------------'
 import socket
 
-host = input("Enter host name: ")
-port = int(input("Enter port number: "))
+host = input("Enter host name: ") #www.google.com
+port = int(input("Enter port number: "))  #8080
 
 try:
     # Create a socket object for TCP (IPv4)
