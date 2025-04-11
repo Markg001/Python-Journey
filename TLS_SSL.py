@@ -28,3 +28,31 @@ if __name__ == '__main__':
 
     print("Serving on https://localhost:4443")
     httpd.serve_forever()
+
+
+print("=============QUESTIONS==============")
+
+# As we conclude, here is a list of questions for you to test your knowledge regarding this chapter’s
+# material. You will find the answers in the Assessments section of the Appendix:
+# 1. Which method of the socket module allows a server socket to accept requests from a client
+# socket from another host?
+# 2. Which methods of the socket module allow you to send and receive data from an IP ad-
+# dress?
+# 3. Which method of the socket module allows you to implement port scanning with sockets
+# and to check the port state?
+# 4. What is the difference between the TCP and UDP protocols, and how do you implement
+# them in Python with the socket module?
+# 5. What is the Python module and the main classes we can use to create an HTTP server?
+###########                             ANSWER          ###############
+# socket.accept()
+
+# socket.send() , socket.recv() .sendto() , .recvfrom()
+
+# socket.connectex()
+
+#TCP = socket.SOCK_STREAM and it is slow due to security reasons
+#UDP = socket.SOCK_DGRAM it is first compared to TCP 
+#implementing them on we use socket.socket(socket.AF_INET, for_tcp you use the above for udp we use)
+
+# to create HTTP we use the module The Python module is http.server, and the main classes are HTTPServer 
+# for setting up the server and BaseHTTPRequestHandler (or SimpleHTTPRequestHandler) to define how HTTP requests are handled.
